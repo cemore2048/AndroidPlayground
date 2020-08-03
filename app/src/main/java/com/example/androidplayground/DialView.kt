@@ -1,6 +1,7 @@
 package com.example.androidplayground
 
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
@@ -14,17 +15,17 @@ import kotlin.math.cos
  */
 class DialView: View {
     companion object {
-        private const val SELECTION_COUNT = 4
+        private const val SELECTION_COUNT = 4f
     }
 
     constructor(context: Context): super(context)
     constructor(context: Context, attributes: AttributeSet) : super(context, attributes)
     constructor(context: Context, attributes: AttributeSet, defStyleAttr: Int): super(context,attributes, defStyleAttr)
 
-    private var width: Float? = null
-    private var height: Float? = null
+    private var width: Float = 0f
+    private var height: Float = 0f
     private var textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private lateinit var dialPaint: Paint
+    private var dialPaint: Paint
     private var radius: Float? = null
     private var activeSelection: Int? = null
     private var tempLabel = StringBuffer(8)
@@ -48,15 +49,28 @@ class DialView: View {
         // the radius
         width = w.toFloat()
         height = h.toFloat()
-        radius = ((width?.coerceAtMost(height ?: 0f) ?: 0f) / 2 * 0.8).toFloat()
+        radius = ((width.coerceAtMost(height)) / 2 * 0.8).toFloat()
     }
 
-    private fun computeXYForPosition(pos: Float, radius: Float) {
+    override fun onDraw(canvas: Canvas) {
+        // Draw the dial
+        canvas.drawCircle(width / 2, height / 2, radius ?: 0f, dialPaint)
+
+        // Draw text labels
+        val labelRadius: Float? = radius?.plus(20)
+        val label: StringBuffer = tempLabel
+        for (i in 0..SELECTION_COUNT) {
+            val xyData: FloatArray = computeXYForPosition(i, labelRadius)
+        }
+
+    }
+    private fun computeXYForPosition(pos: Float, radius: Float): FloatArray {
         val result: FloatArray = tempResult
         val startAngle = Math.PI * (9 / 8)
         val angle = startAngle * (pos * (Math.PI /4))
-        result[0] = ((radius * cos(angle)).plus((width ?: 0f / 2)).toFloat())
-        result[1] = ((radius * Math.sin(angle)).plus(width ?: 0f / 2)).toFloat()
+        result[0] = ((radius * cos(angle)).plus((width)).toFloat())
+        result[1] = ((radius * Math.sin(angle)).plus(width)).toFloat()
+        return result
     }
 
 }
