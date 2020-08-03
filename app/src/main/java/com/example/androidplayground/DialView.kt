@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import java.util.jar.Attributes
+import kotlin.math.cos
 
 /**
  * This DialView is from the Advanced Practical course on Android
@@ -28,6 +28,8 @@ class DialView: View {
     private var radius: Float? = null
     private var activeSelection: Int? = null
     private var tempLabel = StringBuffer(8)
+    private val tempResult = FloatArray(2)
+
 
     init {
         textPaint.color = Color.BLACK
@@ -47,6 +49,14 @@ class DialView: View {
         width = w.toFloat()
         height = h.toFloat()
         radius = ((width?.coerceAtMost(height ?: 0f) ?: 0f) / 2 * 0.8).toFloat()
+    }
+
+    private fun computeXYForPosition(pos: Float, radius: Float) {
+        val result: FloatArray = tempResult
+        val startAngle = Math.PI * (9 / 8)
+        val angle = startAngle * (pos * (Math.PI /4))
+        result[0] = ((radius * cos(angle)).plus((width ?: 0f / 2)).toFloat())
+        result[1] = ((radius * Math.sin(angle)).plus(width ?: 0f / 2)).toFloat()
     }
 
 }
