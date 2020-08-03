@@ -41,5 +41,12 @@ class DialView: View {
 
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        // When the size of this view changes, we want to get the size it grew to, and recalculate
+        // the radius
+        width = w.toFloat()
+        height = h.toFloat()
+        radius = ((width?.coerceAtMost(height ?: 0f) ?: 0f) / 2 * 0.8).toFloat()
+    }
 
 }
