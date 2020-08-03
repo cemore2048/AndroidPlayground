@@ -1,6 +1,7 @@
 package com.example.androidplayground
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
@@ -22,14 +23,23 @@ class DialView: View {
 
     private var width: Float? = null
     private var height: Float? = null
-    private var textPaint: Paint? = null
-    private var dialPaint: Paint? = null
+    private var textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private lateinit var dialPaint: Paint
     private var radius: Float? = null
     private var activeSelection: Int? = null
     private var tempLabel = StringBuffer(8)
 
     init {
+        textPaint.color = Color.BLACK
+        textPaint.style = Paint.Style.FILL_AND_STROKE
+        textPaint.textAlign = Paint.Align.CENTER
+        textPaint.textSize = 40f
+        dialPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        dialPaint.color = Color.GRAY
+
+        activeSelection = 0
 
     }
+
 
 }
