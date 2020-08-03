@@ -13,14 +13,18 @@ import kotlin.math.cos
  * https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-10-custom-views/10-1b-p-using-custom-views/10-1b-p-using-custom-views.html
  *
  */
-class DialView: View {
+class DialView : View {
     companion object {
-        private const val SELECTION_COUNT = 4f
+        private const val SELECTION_COUNT = 4
     }
 
-    constructor(context: Context): super(context)
+    constructor(context: Context) : super(context)
     constructor(context: Context, attributes: AttributeSet) : super(context, attributes)
-    constructor(context: Context, attributes: AttributeSet, defStyleAttr: Int): super(context,attributes, defStyleAttr)
+    constructor(context: Context, attributes: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attributes,
+        defStyleAttr
+    )
 
     private var width: Float = 0f
     private var height: Float = 0f
@@ -60,14 +64,27 @@ class DialView: View {
         val labelRadius: Float? = radius?.plus(20)
         val label: StringBuffer = tempLabel
         for (i in 0..SELECTION_COUNT) {
-            val xyData: FloatArray = computeXYForPosition(i, labelRadius)
+            val xyData: FloatArray = computeXYForPosition(i.toFloat(), labelRadius ?: 0f)
+            val x = xyData[0]
+            val y = xyData[1]
+            label.setLength(0)
+            label.append(i)
+            canvas.drawText(label, 0, label.length, x, y, textPaint)
         }
 
+        // Draw the indicator mark.
+        val markerRadius = radius ?: 0 - 35f
+        val xyData = computeXYForPosition(activeSelection?.toFloat() ?: 0f, markerRadius)
+        val x = xyData[0]
+        val y = xyData[1]
+        canvas.drawCircle(x, y, 20f, textPaint)
+
     }
+
     private fun computeXYForPosition(pos: Float, radius: Float): FloatArray {
         val result: FloatArray = tempResult
         val startAngle = Math.PI * (9 / 8)
-        val angle = startAngle * (pos * (Math.PI /4))
+        val angle = startAngle * (pos * (Math.PI / 4))
         result[0] = ((radius * cos(angle)).plus((width)).toFloat())
         result[1] = ((radius * Math.sin(angle)).plus(width)).toFloat()
         return result
