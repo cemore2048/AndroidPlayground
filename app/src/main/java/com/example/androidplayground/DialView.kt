@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import kotlin.math.cos
 
 /**
  * This DialView is from the Advanced Practical course on Android
@@ -30,7 +29,7 @@ class DialView : View {
     private var height: Float = 0f
     private var textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var dialPaint: Paint
-    private var radius: Float? = null
+    private var radius: Float = 0f
     private var activeSelection: Int? = null
     private var tempLabel = StringBuffer(8)
     private val tempResult = FloatArray(2)
@@ -57,37 +56,37 @@ class DialView : View {
     }
 
     override fun onDraw(canvas: Canvas) {
-        // Draw the dial
+        // Draw the dial.
         canvas.drawCircle(width / 2, height / 2, radius ?: 0f, dialPaint)
-
-        // Draw text labels
-        val labelRadius: Float? = radius?.plus(20)
+        // Draw the text labels.
+        val labelRadius: Float = radius + 20
         val label: StringBuffer = tempLabel
-        for (i in 0..SELECTION_COUNT) {
-            val xyData: FloatArray = computeXYForPosition(i.toFloat(), labelRadius ?: 0f)
+        for (i in 0 until SELECTION_COUNT) {
+            val xyData = computeXYForPosition(i, labelRadius)
             val x = xyData[0]
             val y = xyData[1]
             label.setLength(0)
             label.append(i)
             canvas.drawText(label, 0, label.length, x, y, textPaint)
         }
-
         // Draw the indicator mark.
-        val markerRadius = radius ?: 0 - 35f
-        val xyData = computeXYForPosition(activeSelection?.toFloat() ?: 0f, markerRadius)
+        val markerRadius: Float = radius - 35f
+        val xyData = computeXYForPosition(
+            activeSelection ?: 0,
+            markerRadius
+        )
         val x = xyData[0]
         val y = xyData[1]
-        canvas.drawCircle(x, y, 20f, textPaint)
+        canvas.drawCircle(x, y, 20.toFloat(), textPaint)
 
     }
 
-    private fun computeXYForPosition(pos: Float, radius: Float): FloatArray {
+    private fun computeXYForPosition(pos: Int, radius: Float): FloatArray {
         val result: FloatArray = tempResult
-        val startAngle = Math.PI * (9 / 8)
-        val angle = startAngle * (pos * (Math.PI / 4))
-        result[0] = ((radius * cos(angle)).plus((width)).toFloat())
-        result[1] = ((radius * Math.sin(angle)).plus(width)).toFloat()
+        val startAngle = Math.PI * (9 / 8.0) // Angles are in radians.
+        val angle = startAngle + pos * (Math.PI / 4)
+        result[0] = (radius * Math.cos(angle)).toFloat() + width / 2
+        result[1] = (radius * Math.sin(angle)).toFloat() + height / 2
         return result
     }
-
 }
