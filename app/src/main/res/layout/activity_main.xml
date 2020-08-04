@@ -9,6 +9,8 @@
     <com.example.androidplayground.DialView
         android:id="@+id/dialView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:fanColor="@color/blue1"
+        app:fanOffColor="@color/cyan1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

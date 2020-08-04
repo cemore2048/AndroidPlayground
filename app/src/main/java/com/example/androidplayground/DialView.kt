@@ -17,7 +17,7 @@ class DialView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr), View.OnClickListener {
+) : View(context, attrs, defStyleAttr) {
     companion object {
         private const val SELECTION_COUNT = 4
     }
@@ -33,6 +33,8 @@ class DialView @JvmOverloads constructor(
 
 
     init {
+        isClickable = true
+
         textPaint.color = Color.BLACK
         textPaint.style = Paint.Style.FILL_AND_STROKE
         textPaint.textAlign = Paint.Align.CENTER
@@ -78,7 +80,8 @@ class DialView @JvmOverloads constructor(
         canvas.drawCircle(x, y, 20.toFloat(), textPaint)
     }
 
-    override fun onClick(v: View) {
+    override fun performClick(): Boolean {
+        if (super.performClick()) return true
         var localActiveSelecton = activeSelection
         localActiveSelecton = (localActiveSelecton + 1) % SELECTION_COUNT
         activeSelection = localActiveSelecton
@@ -89,6 +92,8 @@ class DialView @JvmOverloads constructor(
         }
 
         invalidate()
+        return true
+
     }
 
     private fun computeXYForPosition(pos: Int, radius: Float): FloatArray {
