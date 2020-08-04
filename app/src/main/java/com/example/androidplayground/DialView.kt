@@ -6,13 +6,15 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import kotlin.math.cos
+import kotlin.math.sin
 
 /**
  * This DialView is from the Advanced Practical course on Android
  * https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-10-custom-views/10-1b-p-using-custom-views/10-1b-p-using-custom-views.html
  *
  */
-class DialView : View {
+class DialView : View, View.OnClickListener {
     companion object {
         private const val SELECTION_COUNT = 4
     }
@@ -30,7 +32,7 @@ class DialView : View {
     private var textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var dialPaint: Paint
     private var radius: Float = 0f
-    private var activeSelection: Int? = null
+    private var activeSelection: Int = 0
     private var tempLabel = StringBuffer(8)
     private val tempResult = FloatArray(2)
 
@@ -45,6 +47,7 @@ class DialView : View {
 
         activeSelection = 0
 
+        setOnClickListener(this)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -57,7 +60,7 @@ class DialView : View {
 
     override fun onDraw(canvas: Canvas) {
         // Draw the dial.
-        canvas.drawCircle(width / 2, height / 2, radius ?: 0f, dialPaint)
+        canvas.drawCircle(width / 2, height / 2, radius, dialPaint)
         // Draw the text labels.
         val labelRadius: Float = radius + 20
         val label: StringBuffer = tempLabel
@@ -72,21 +75,33 @@ class DialView : View {
         // Draw the indicator mark.
         val markerRadius: Float = radius - 35f
         val xyData = computeXYForPosition(
-            activeSelection ?: 0,
+            activeSelection,
             markerRadius
         )
         val x = xyData[0]
         val y = xyData[1]
         canvas.drawCircle(x, y, 20.toFloat(), textPaint)
+    }
 
+    override fun onClick(v: View) {
+        var localActiveSelecton = activeSelection
+        localActiveSelecton = (localActiveSelecton + 1) % SELECTION_COUNT
+        activeSelection = localActiveSelecton
+        if (localActiveSelecton >= 1) {
+            dialPaint.color = Color.GREEN
+        } else {
+            dialPaint.color = Color.GRAY
+        }
+
+        invalidate()
     }
 
     private fun computeXYForPosition(pos: Int, radius: Float): FloatArray {
         val result: FloatArray = tempResult
         val startAngle = Math.PI * (9 / 8.0) // Angles are in radians.
         val angle = startAngle + pos * (Math.PI / 4)
-        result[0] = (radius * Math.cos(angle)).toFloat() + width / 2
-        result[1] = (radius * Math.sin(angle)).toFloat() + height / 2
+        result[0] = (radius * cos(angle)).toFloat() + width / 2
+        result[1] = (radius * sin(angle)).toFloat() + height / 2
         return result
     }
 }
