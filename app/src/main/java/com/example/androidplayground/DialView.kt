@@ -12,20 +12,15 @@ import kotlin.math.sin
 /**
  * This DialView is from the Advanced Practical course on Android
  * https://google-developer-training.github.io/android-developer-advanced-course-practicals/unit-5-advanced-graphics-and-views/lesson-10-custom-views/10-1b-p-using-custom-views/10-1b-p-using-custom-views.html
- *
  */
-class DialView : View, View.OnClickListener {
+class DialView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr), View.OnClickListener {
     companion object {
         private const val SELECTION_COUNT = 4
     }
-
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attributes: AttributeSet) : super(context, attributes)
-    constructor(context: Context, attributes: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attributes,
-        defStyleAttr
-    )
 
     private var width: Float = 0f
     private var height: Float = 0f
