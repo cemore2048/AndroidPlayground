@@ -17,6 +17,3 @@ dependencies {
     compileOnly "com.android.tools.lint:lint-checks:$lintVersion"
 
 }
-
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"

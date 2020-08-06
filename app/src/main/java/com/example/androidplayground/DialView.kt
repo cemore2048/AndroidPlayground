@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.withStyledAttributes
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -18,6 +19,7 @@ class DialView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+
     companion object {
         private const val SELECTION_COUNT = 4
     }
@@ -30,7 +32,8 @@ class DialView @JvmOverloads constructor(
     private var activeSelection: Int = 0
     private var tempLabel = StringBuffer(8)
     private val tempResult = FloatArray(2)
-
+    private var fanOffColor = 0
+    private var fanOnColor = 0
 
     init {
         isClickable = true
@@ -40,11 +43,16 @@ class DialView @JvmOverloads constructor(
         textPaint.textAlign = Paint.Align.CENTER
         textPaint.textSize = 40f
         dialPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        dialPaint.color = Color.GRAY
 
         activeSelection = 0
 
-        setOnClickListener(this)
+        context.withStyledAttributes(attrs, R.styleable.DialView) {
+            fanOnColor = getColor(R.styleable.DialView_fanColor, 0)
+            fanOffColor = getColor(R.styleable.DialView_fanOffColor, 0)
+        }
+
+        dialPaint.color = fanOffColor
+
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -81,14 +89,15 @@ class DialView @JvmOverloads constructor(
     }
 
     override fun performClick(): Boolean {
+        val a = hasOnClickListeners()
         if (super.performClick()) return true
         var localActiveSelecton = activeSelection
         localActiveSelecton = (localActiveSelecton + 1) % SELECTION_COUNT
         activeSelection = localActiveSelecton
         if (localActiveSelecton >= 1) {
-            dialPaint.color = Color.GREEN
+            dialPaint.color = fanOnColor
         } else {
-            dialPaint.color = Color.GRAY
+            dialPaint.color = fanOffColor
         }
 
         invalidate()

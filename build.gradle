@@ -8,8 +8,8 @@ buildscript {
         maven {
             url = "https://dosh.jfrog.io/dosh/android"
             credentials {
-                username = "rafa.morenocesar@dosh.cash"
-                password = "AKCp5e3ehr2REVZbSJXfVvDqMErb5YTzGwQdGeE8fZAYX5CvJc3b2T5ZVXu8wA4cv6tEVG1oG"
+                username = ""
+                password = ""
             }
         }
 
