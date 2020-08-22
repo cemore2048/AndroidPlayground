@@ -1,18 +1,17 @@
 package com.example.androidplayground
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
+import kotlin.math.abs
 
-class MyCanvas(context: Context): View(context) {
+class MyCanvas(context: Context) : View(context) {
 
     companion object {
-        private const val STROKE_WIDTH = 12f
-
+        private const val STROKE_WIDTH = 30f
     }
 
     private lateinit var extraCanvas: Canvas
@@ -88,15 +87,19 @@ class MyCanvas(context: Context): View(context) {
         val dx = abs(motionTouchEventX - currentX)
         val dy = abs(motionTouchEventY - currentY)
 
-        if (dx >= touchTolerance || dy >= touchTolerance) {
             // QuadTo() adds a quadratic bezier from the last point,
             // approaching control point (x1,y1), and ending at (x2,y2).
-            path.quadTo(currentX, currentY, (motionTouchEventX + currentX) / 2, (motionTouchEventY + currentY) / 2)
+            path.quadTo(
+                currentX,
+                currentY,
+                (motionTouchEventX + currentX) / 2,
+                (motionTouchEventY + currentY) / 2
+            )
             currentX = motionTouchEventX
             currentY = motionTouchEventY
             // Draw the path in the extra bitmap to cache it.
             extraCanvas.drawPath(path, paint)
-        }
+
 
         invalidate()
     }
