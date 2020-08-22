@@ -84,6 +84,16 @@ class MyCanvas(context: Context) : View(context) {
         curPath.moveTo(motionTouchEventX, motionTouchEventY)
         currentX = motionTouchEventX
         currentY = motionTouchEventY
+
+        curPath.quadTo(
+            currentX,
+            currentY,
+            (motionTouchEventX + currentX) / 2,
+            (motionTouchEventY + currentY) / 2
+        )
+        currentX = motionTouchEventX
+        currentY = motionTouchEventY
+        invalidate()
     }
 
     private fun touchMove() {
