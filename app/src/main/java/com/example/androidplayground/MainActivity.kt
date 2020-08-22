@@ -8,7 +8,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val myCanvasView: MyCanvas = MyCanvas(this)
+        val myCanvasView = MyCanvas(this)
         myCanvasView.systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN
         myCanvasView.contentDescription = getString(R.string.canvasContentDescription)
         setContentView(myCanvasView)
