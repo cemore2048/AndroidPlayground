@@ -8,9 +8,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val myCanvasView = MyCanvas(this)
-        myCanvasView.systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN
-        myCanvasView.contentDescription = getString(R.string.canvasContentDescription)
-        setContentView(myCanvasView)
+//        val myCanvasView = MyCanvas(this)
+//        myCanvasView.systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN
+//        myCanvasView.contentDescription = getString(R.string.canvasContentDescription)
+
+        val clippedView: ClippedView = ClippedView()
+        setContentView(clippedView)
     }
 }
