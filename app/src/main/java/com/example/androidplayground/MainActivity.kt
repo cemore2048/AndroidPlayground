@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 //        myCanvasView.systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN
 //        myCanvasView.contentDescription = getString(R.string.canvasContentDescription)
 
-        val clippedView: ClippedView = ClippedView()
+        val clippedView = ClippedView(this)
         setContentView(clippedView)
     }
 }
