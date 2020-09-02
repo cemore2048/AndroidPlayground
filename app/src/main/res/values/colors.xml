@@ -6,6 +6,7 @@
 
     <color name="colorBackground">#FFFF5500</color>
     <color name="colorPaint">#FFFFEB3B</color>
+    <color name="black">#000</color>
 
     <color name="red1">#FF2222</color>
     <color name="green1">#22FF22</color>
