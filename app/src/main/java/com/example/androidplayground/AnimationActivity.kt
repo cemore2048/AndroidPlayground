@@ -1,7 +1,9 @@
 package com.example.androidplayground
 
+import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 
@@ -15,6 +17,8 @@ class AnimationActivity : AppCompatActivity() {
     lateinit var fadeButton: Button
     lateinit var colorizeButton: Button
     lateinit var showerButton: Button
+
+    val animator = ObjectAnimator.ofFloat(star, View.ROTATION, -360f, 0f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +58,8 @@ class AnimationActivity : AppCompatActivity() {
     }
 
     private fun rotater() {
+        animator.duration = 1000
+        animator.start()
     }
 
     private fun translater() {
