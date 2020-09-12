@@ -81,7 +81,7 @@ class AnimationActivity : AppCompatActivity() {
         val animator = ObjectAnimator.ofPropertyValuesHolder(star, scaleX, scaleY)
         animator.repeatCount = 1
         animator.repeatMode = ObjectAnimator.REVERSE
-        disableDuringAnimation(star, animator)
+        disableDuringAnimation(scaleButton, animator)
         animator.start()
     }
 
@@ -97,10 +97,10 @@ class AnimationActivity : AppCompatActivity() {
     private fun disableDuringAnimation(view: View, animator: ObjectAnimator) {
         animator.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator?) {
-                rotateButton.isEnabled = false
+                view.isEnabled = false
             }
             override fun onAnimationEnd(animation: Animator?) {
-                rotateButton.isEnabled = true
+                view.isEnabled = true
             }
         })
     }
