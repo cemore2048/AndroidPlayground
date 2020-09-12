@@ -1,9 +1,12 @@
 package com.example.androidplayground
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
 import android.widget.Button
 import android.widget.ImageView
 
@@ -17,8 +20,6 @@ class AnimationActivity : AppCompatActivity() {
     lateinit var fadeButton: Button
     lateinit var colorizeButton: Button
     lateinit var showerButton: Button
-
-    val animator = ObjectAnimator.ofFloat(star, View.ROTATION, -360f, 0f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,16 @@ class AnimationActivity : AppCompatActivity() {
     }
 
     private fun rotater() {
+        val animator = ObjectAnimator.ofFloat(star, View.ROTATION, -360f, 0f)
         animator.duration = 1000
+        animator.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator?) {
+                rotateButton.isEnabled = false
+            }
+            override fun onAnimationEnd(animation: Animator?) {
+                rotateButton.isEnabled = true
+            }
+        })
         animator.start()
     }
 
