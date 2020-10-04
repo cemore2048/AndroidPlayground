@@ -1,3 +1,4 @@
+include ':autoadapter-processor'
 include ':autoadapter-annotations'
 include ':lint'
 rootProject.name='AndroidPlayground'
