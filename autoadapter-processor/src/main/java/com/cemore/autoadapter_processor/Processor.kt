@@ -25,13 +25,15 @@ class Processor: AbstractProcessor() {
             val modelData = getModelData(it)
             val kaptKotlinGeneratedDir = processingEnv.options[KAPT_KOTLIN_GENERATED_OPTION_NAME] ?: return false
         }
+
+        return true
     }
 
     private fun getModelData(elem: Element): ModelData {
         val packageName = processingEnv.elementUtils.getPackageOf(elem).toString()
         val modelName = elem.simpleName.toString()
         val annotation = elem.getAnnotation(AdapterModel::class.java)
-        val layoutId = annotation?.layoutId
+        val layoutId = annotation.layoutId
         val viewHolderBindingData = elem.enclosedElements.mapNotNull {
             val viewHolderBinding: ViewHolderBinding? = it.getAnnotation(ViewHolderBinding::class.java)
             if (viewHolderBinding == null) {
