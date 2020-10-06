@@ -1,6 +1,5 @@
 package com.cemore.autoadapter_annotations
 
-@Target(AnnotationTarget.ANNOTATION_CLASS)
+@Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
-annotation class AdapterModel(val layoutId: Int) {
-}
+annotation class AdapterModel(val layoutId: Int)

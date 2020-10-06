@@ -25,50 +25,50 @@ class MainActivity : AppCompatActivity() {
 //        val myCanvasView = MyCanvas(this)
 //        myCanvasView.systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN
 //        myCanvasView.contentDescription = getString(R.string.canvasContentDescription)
-
-        setContent {
-            Greeting("Hello, World")
-        }
+        Person("Big Bird", "123 Seasame Street")
+//        setContent {
+//            Greeting("Hello, World")
+//        }
         val clippedView = ClippedView(this)
         setContentView(clippedView)
     }
 
-    @Composable
-    fun Greeting(name: String) {
-        Text(name)
-    }
-
-    @Preview
-    @Composable
-    fun PreviewGreeting() {
-        Greeting("This is my greeting")
-    }
-
-    @Composable
-    fun NewsStory() {
-        val image = imageResource(R.drawable.ic_launcher_background)
-        MaterialTheme {
-            Column(modifier = Modifier.padding(16.dp)) {
-                val imageModifier = Modifier
-                    .preferredHeight(180.dp)
-                    .fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(4.dp))
-                Image(image, modifier = imageModifier, contentScale = ContentScale.Crop)
-                Spacer(Modifier.preferredHeight(16.dp))
-                Text( "A day wandering through the sandhills " +
-                        "in Shark Fin Cove, and a few of the " +
-                        "sights I saw",
-                style = typography.h6,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis)
-                Text("Davenport, California")
-                Text("December 2018")
-            }
-        }
-    }
-    @Preview
-    @Composable
-    fun DefaultPreview() {
-        NewsStory()
-    }
+//    @Composable
+//    fun Greeting(name: String) {
+//        Text(name)
+//    }
+//
+//    @Preview
+//    @Composable
+//    fun PreviewGreeting() {
+//        Greeting("This is my greeting")
+//    }
+//
+//    @Composable
+//    fun NewsStory() {
+//        val image = imageResource(R.drawable.ic_launcher_background)
+//        MaterialTheme {
+//            Column(modifier = Modifier.padding(16.dp)) {
+//                val imageModifier = Modifier
+//                    .preferredHeight(180.dp)
+//                    .fillMaxWidth()
+//                    .clip(shape = RoundedCornerShape(4.dp))
+//                Image(image, modifier = imageModifier, contentScale = ContentScale.Crop)
+//                Spacer(Modifier.preferredHeight(16.dp))
+//                Text( "A day wandering through the sandhills " +
+//                        "in Shark Fin Cove, and a few of the " +
+//                        "sights I saw",
+//                style = typography.h6,
+//                maxLines = 2,
+//                overflow = TextOverflow.Ellipsis)
+//                Text("Davenport, California")
+//                Text("December 2018")
+//            }
+//        }
+//    }
+//    @Preview
+//    @Composable
+//    fun DefaultPreview() {
+//        NewsStory()
+//    }
 }
