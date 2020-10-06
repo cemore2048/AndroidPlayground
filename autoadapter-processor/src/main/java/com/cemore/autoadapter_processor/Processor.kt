@@ -2,8 +2,11 @@ package com.cemore.autoadapter_processor
 
 import com.cemore.autoadapter_annotations.AdapterModel
 import com.cemore.autoadapter_annotations.ViewHolderBinding
+import com.cemore.autoadapter_processor.codegen.AdapterCodeBuilder
 import com.cemore.autoadapter_processor.models.ModelData
 import com.cemore.autoadapter_processor.models.ViewHolderBindingData
+import com.squareup.kotlinpoet.FileSpec
+import java.io.File
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment
 import javax.annotation.processing.SupportedSourceVersion
@@ -24,7 +27,13 @@ class Processor: AbstractProcessor() {
         roundEnv.getElementsAnnotatedWith(AdapterModel::class.java).forEach {
             val modelData = getModelData(it)
             val kaptKotlinGeneratedDir = processingEnv.options[KAPT_KOTLIN_GENERATED_OPTION_NAME] ?: return false
+            val fileName = "${modelData.modelName}Adapter"
+            FileSpec.builder(modelData.packageName, fileName)
+                .addType(AdapterCodeBuilder(fileName, modelData).build())
+                .build()
+                .writeTo(File(kaptKotlinGeneratedDir))
         }
+
 
         return true
     }
