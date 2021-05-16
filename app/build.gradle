@@ -43,40 +43,40 @@ android {
             }
         }
     }
-    buildFeatures {
-        // Enables Jetpack Compose for this module
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerVersion = "${rootProject.kotlinVersion}"
-        kotlinCompilerExtensionVersion = "1.0.0-alpha01"
-    }
+//    buildFeatures {
+//        // Enables Jetpack Compose for this module
+//        compose = true
+//    }
+//
+//    composeOptions {
+//        kotlinCompilerVersion = "${rootProject.kotlinVersion}"
+//        kotlinCompilerExtensionVersion = "1.0.0-alpha01"
+//    }
 }
 
 dependencies {
     implementation(fileTree(dir: 'libs', include: ['*.jar']))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${rootProject.kotlinVersion}")
     implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.core:core-ktx:1.3.1")
-    testImplementation("junit:junit:4.12")
+    implementation("androidx.core:core-ktx:1.3.2")
+    testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
 
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
-    implementation("com.google.android.material:material:1.3.0-alpha02")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("com.google.android.material:material:1.4.0-beta01")
 
     // Tooling support (Previews, etc.)
-    implementation 'androidx.ui:ui-tooling:1.0.0-alpha03'
+    implementation 'androidx.ui:ui-tooling:1.0.0-alpha07'
 
-    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation("androidx.compose.foundation:foundation:1.0.0-alpha03")
-
-    // Material Design
-    implementation("androidx.compose.material:material:1.0.0-alpha03")
-
-    // Material design icons
-    implementation("androidx.compose.material:material-icons-core:1.0.0-alpha03")
-    implementation("androidx.compose.material:material-icons-extended:1.0.0-alpha03")
+//    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+//    implementation("androidx.compose.foundation:foundation:1.0.0-alpha03")
+//
+//    // Material Design
+//    implementation("androidx.compose.material:material:1.0.0-alpha03")
+//
+//    // Material design icons
+//    implementation("androidx.compose.material:material-icons-core:1.0.0-alpha03")
+//    implementation("androidx.compose.material:material-icons-extended:1.0.0-alpha03")
 
     implementation(project(":autoadapter-annotations"))
     kapt(project(":autoadapter-processor"))
