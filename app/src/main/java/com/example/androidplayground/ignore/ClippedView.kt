@@ -1,10 +1,11 @@
-package com.example.androidplayground
+package com.example.androidplayground.ignore
 
 import android.content.Context
 import android.graphics.*
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
+import com.example.androidplayground.R
 
 class ClippedView @JvmOverloads constructor(
     context: Context,

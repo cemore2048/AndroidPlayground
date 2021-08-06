@@ -1,4 +1,4 @@
-package com.example.androidplayground
+package com.example.androidplayground.ignore
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.withStyledAttributes
+import com.example.androidplayground.R
 import kotlin.math.cos
 import kotlin.math.sin
 

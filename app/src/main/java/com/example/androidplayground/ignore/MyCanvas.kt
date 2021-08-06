@@ -1,4 +1,4 @@
-package com.example.androidplayground
+package com.example.androidplayground.ignore
 
 import android.content.Context
 import android.graphics.Canvas
@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
+import com.example.androidplayground.R
 import kotlin.math.abs
 
 class MyCanvas(context: Context) : View(context) {

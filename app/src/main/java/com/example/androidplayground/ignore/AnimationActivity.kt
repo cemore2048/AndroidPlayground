@@ -1,4 +1,4 @@
-package com.example.androidplayground
+package com.example.androidplayground.ignore
 
 import android.animation.*
 import androidx.appcompat.app.AppCompatActivity
@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
+import com.example.androidplayground.R
 
 
 class AnimationActivity : AppCompatActivity() {
