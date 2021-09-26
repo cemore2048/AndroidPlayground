@@ -1,5 +1,6 @@
 package com.example.androidplayground
 
+import com.squareup.moshi.Json
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
