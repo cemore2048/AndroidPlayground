@@ -1,33 +1,59 @@
 package com.example.androidplayground
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.*
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.ImageView
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
-import java.io.InputStream
-import java.net.URL
+import coil.bitmap.BitmapPool
+import coil.load
+import coil.size.Size
+import coil.transform.Transformation
 
 class MainActivity : AppCompatActivity() {
-    
-    private lateinit var catImage: ImageView
+    private lateinit var coilImage: ImageView
+    private lateinit var regularImage: ImageView
+
+    val color = Color.RED
+    val mode = PorterDuff.Mode.SRC_IN
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        catImage = findViewById(R.id.image)
+        coilImage = findViewById(R.id.coilImage)
+        regularImage = findViewById(R.id.regularImage)
 
-        Thread(object : Runnable {
-            var bitmap: Bitmap? = null
-            override fun run() {
-                val input: InputStream = URL("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.RGO2_JeImrSM658MPIASrwHaEo%26pid%3DApi&f=1").openStream()
-                bitmap = BitmapFactory.decodeStream(input)
+        regularImage.setImageResource(R.drawable.ic_baseline_outline_mall)
+        regularImage.colorFilter = PorterDuffColorFilter(color, mode)
 
-                Handler(Looper.getMainLooper()).post { catImage.setImageBitmap(bitmap) }
-            }
-        }).start()
+        coilImage.load(R.drawable.ic_baseline_outline_mall) {
+            transformations(ColorTintTransformation(color, mode))
+        }
+    }
+}
+
+
+class ColorTintTransformation(
+        @ColorInt private val color: Int,
+        private val mode: PorterDuff.Mode = PorterDuff.Mode.SRC_ATOP
+) : Transformation {
+
+    override fun key(): String = "${ColorTintTransformation::class.java.name}-$mode-$color"
+
+    override suspend fun transform(pool: BitmapPool, input: Bitmap, size: Size): Bitmap {
+        val width = input.width
+        val height = input.height
+
+        val config = input.config
+        val output = pool.get(width, height, config)
+
+        val canvas = Canvas(output)
+        val paint = Paint()
+        paint.isAntiAlias = true
+        paint.colorFilter = PorterDuffColorFilter(color, mode)
+        canvas.drawBitmap(input, 0f, 0f, paint)
+
+        return output
     }
 }
