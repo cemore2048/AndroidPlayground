@@ -57,29 +57,16 @@ android {
 dependencies {
     implementation(fileTree(dir: 'libs', include: ['*.jar']))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${rootProject.kotlinVersion}")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.core:core-ktx:1.3.2")
+    implementation("androidx.appcompat:appcompat:1.4.0")
+    implementation("androidx.core:core-ktx:1.7.0")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
 
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("com.google.android.material:material:1.4.0-beta01")
-    implementation("io.coil-kt:coil:1.3.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
+    implementation("com.google.android.material:material:1.5-beta01")
+    implementation("io.coil-kt:coil:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
-
-    // Tooling support (Previews, etc.)
-    implementation 'androidx.ui:ui-tooling:1.0.0-alpha07'
-
-//    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-//    implementation("androidx.compose.foundation:foundation:1.0.0-alpha03")
-//
-//    // Material Design
-//    implementation("androidx.compose.material:material:1.0.0-alpha03")
-//
-//    // Material design icons
-//    implementation("androidx.compose.material:material-icons-core:1.0.0-alpha03")
-//    implementation("androidx.compose.material:material-icons-extended:1.0.0-alpha03")
 
     implementation(project(":autoadapter-annotations"))
     kapt(project(":autoadapter-processor"))
