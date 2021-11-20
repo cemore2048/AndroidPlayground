@@ -6,13 +6,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven {
-            url = uri("https://dosh.jfrog.io/dosh/android")
-            credentials {
-                username = ""
-                password = ""
-            }
-        }
 
     }
     dependencies {
