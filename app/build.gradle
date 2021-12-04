@@ -102,4 +102,7 @@ dependencies {
 
     // UI Tests
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.0.5")
+
+    // Unit Tests
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 }
