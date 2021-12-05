@@ -1,9 +1,7 @@
 package com.example.androidplayground
 
-import android.app.Application
+import android.annotation.SuppressLint
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,7 +11,10 @@ class ExecutionViewModel(
     private val executionRepository: ExecutionRepository,
 ) : ViewModel() {
 
-    private val executionLiveData = MutableLiveData<String>()
+    val executionLiveData = MutableLiveData<String>()
+
+
+    @SuppressLint("CheckResult")
     fun execute(command: String) {
         executionRepository.execute("python", command)
             .subscribeOn(Schedulers.io())
