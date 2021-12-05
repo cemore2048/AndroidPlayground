@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
     @Composable
     fun AppTopBar(onClick: () -> Unit) {
         TopAppBar(elevation = 25.dp) {
-            Text(text = "Repl.it mobile")
+            Text(text = "Repl.it mobile",
+                Modifier.weight(1f))
             IconButton(
                 content = {
                     Icon(Icons.Filled.PlayArrow, "Run")
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             onValueChange = {
                 onCodeChanged(it)
             },
-            placeholder = { Text("Write your code here") },
+            placeholder = { Text("") },
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
