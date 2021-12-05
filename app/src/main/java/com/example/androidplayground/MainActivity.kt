@@ -6,8 +6,6 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
@@ -77,7 +75,6 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     fun ColumnScope.Editor(code: String, onCodeChanged: (String) -> Unit) {
-        val focusManager = LocalFocusManager.current
         TextField(
             value = code,
             onValueChange = {
@@ -87,7 +84,6 @@ class MainActivity : AppCompatActivity() {
             modifier = Modifier
                 .weight(.75f)
                 .fillMaxWidth()
-
         )
     }
 
