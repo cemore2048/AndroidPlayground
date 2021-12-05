@@ -12,7 +12,7 @@ class ExecutionViewModel(
     private val executionRepository: ExecutionRepository,
 ) : ViewModel() {
 
-    val disposables = CompositeDisposable()
+    private val disposables = CompositeDisposable()
     val executionLiveData = MutableLiveData<String>()
 
     @SuppressLint("CheckResult")

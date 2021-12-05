@@ -3,6 +3,7 @@ package com.example.androidplayground
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
@@ -15,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     @ExperimentalComposeUiApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         setContent {
             var text by rememberSaveable { mutableStateOf("") }
@@ -95,7 +98,13 @@ class MainActivity : AppCompatActivity() {
             placeholder = { Text("Your output will load here") },
             modifier = Modifier
                 .weight(.25f)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            readOnly = true,
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.DarkGray,
+                textColor = Color.LightGray,
+                placeholderColor = Color.LightGray
+            )
         )
     }
 
