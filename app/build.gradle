@@ -15,7 +15,7 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
-        useIR  = true
+        useIR = true
     }
 
     defaultConfig {
@@ -105,4 +105,9 @@ dependencies {
 
     // Unit Tests
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+
+    // Dagger
+    implementation("com.google.dagger:dagger:2.40.4")
+    kapt("com.google.dagger:dagger-compiler:2.40.4")
+
 }
