@@ -20,6 +20,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -27,10 +28,13 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    private val repository =
-        ExecutionRepository(executionEndpoint = ExecutionEndpoint.createEndpoint())
+
+    @Inject
+    lateinit var repository: ExecutionRepository
+
     private val executionViewModel: ExecutionViewModel by lazy {
         ViewModelProvider(
             this,
@@ -41,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     @ExperimentalComposeUiApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DaggerApplicationComponent.create().inject(this)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         setContent {
@@ -61,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     fun AppTopBar(onClick: () -> Unit) {
         val keyboardController = LocalSoftwareKeyboardController.current
-        TopAppBar(elevation = 25.dp) {
+        TopAppBar(elevation = 30.dp) {
             Text(
                 text = "Repl.it mobile",
                 Modifier
@@ -90,7 +95,7 @@ class MainActivity : AppCompatActivity() {
             placeholder = { Text("") },
             modifier = Modifier
                 .weight(.75f)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         )
     }
 

@@ -17,37 +17,11 @@ interface ExecutionEndpoint {
     fun execute(
         @Body request: CommandRequest
     ): Observable<ExecutionResult>
-
-    companion object Factory {
-        private const val BASE_URL = "https://eval-backend.cemore2048.repl.co"
-        fun createEndpoint(): ExecutionEndpoint {
-            val clientBuilder = OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor())
-
-            val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(clientBuilder.build())
-                .build()
-
-            return retrofit.create(ExecutionEndpoint::class.java)
-        }
-    }
 }
 
 data class ExecutionResult(val result: String)
 data class CommandRequest(val language: String, val command: String)
 
-class HttpLoggingInterceptor : Interceptor {
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain
-            .request()
-            .newBuilder()
-            .header("Content-Type", "application/json")
-            .build()
-        return chain.proceed(request)
-    }
-}
+
 
 
