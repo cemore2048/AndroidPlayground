@@ -59,4 +59,6 @@ can choose where you want the console
 - More languages support
 
 ## Screenshots
+![Code not run](/screen_shot_1.png)
 
+![Code after ran](/screen_shot_2.png)
