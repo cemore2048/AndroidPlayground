@@ -10,8 +10,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        PlaygroundApplication.getApplication().
+        (application as PlaygroundApplication).applicationComponent.inject(this)
     }
-
 }
 
