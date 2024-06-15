@@ -1,2 +1,3 @@
 rootProject.name='AndroidPlayground'
 include ':app'
+include ':processor'
